@@ -196,6 +196,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemplateHelpers\AbstractClass\CollectionsGroupHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\GroupHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\ListTemplateHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\TemplateHelper.cs" />

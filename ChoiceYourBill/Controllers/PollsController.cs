@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ChoiceYourBill.Controllers.AbstractClass;
 using ChoiceYourBill.Models;
 using ChoiceYourBill.Models.AbstractClass;
+using ChoiceYourBill.TemplateHelpers.RecordMode;
 
 namespace ChoiceYourBill.Controllers
 {
@@ -19,8 +20,10 @@ namespace ChoiceYourBill.Controllers
         // GET: Polls
         public ActionResult Index()
         {
-            List<Poll> list = db.Polls.Include("Votes").ToList();
-            return View(list);
+            PollsRecordTemplateHelper templateHelper = new PollsRecordTemplateHelper();
+//            List<Poll> list = db.Polls.Include("Votes").ToList();
+            ViewBag("templateHelper");
+            return View(templateHelper.Records);
         }
 
         // GET: Polls/Details/5

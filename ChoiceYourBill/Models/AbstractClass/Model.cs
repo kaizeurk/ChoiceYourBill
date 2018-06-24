@@ -8,6 +8,7 @@ namespace ChoiceYourBill.Models.AbstractClass
     abstract public class Model 
     {
         protected int id;
+        public String Name { get; set; }
 
     }
 }

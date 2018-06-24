@@ -1,38 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using ChoiceYourBill.Models.AbstractClass;
 
 namespace ChoiceYourBill.TemplateHelpers.AbstractClass
 {
-    public class GroupHelper
+    public struct GroupHelper
     {
-       private Dictionary<string, List<Object>> map;
+        public string title;
+        public List<Model> group;
 
-        public GroupHelper()
+        public GroupHelper(string inTitle,List<Model> inGroup)
         {
-            this.Map  = new Dictionary<string, List<Object>>();
+           @group = new List<Model>();
+           title = inTitle;
+           if (inGroup.Any())
+           {
+              collect(inTitle, inGroup);  
+           }
         }
-   
-        public GroupHelper(Dictionary<string, List<Object>> map)
+
+        private void collect(string inTitle, List<Model> inGroup)
         {
-            this.Map = map;
+            foreach (var iteModel in inGroup)
+            {
+               if(String.Equals((iteModel.Name).ToLower(), inTitle.ToLower()))
+               {
+                 @group.Add(iteModel);       
+               } 
+            } 
         }
 
-        public Dictionary<string, List<Object>> Map { get; }
-
-        public void Add(String name, Object value)
+        public void Add(string inTitle, Model inModel)
         {
-            if(Map.ContainsKey(name))
+            if (String.Equals(inTitle,title))
             {
-                Map[name].Add(value);
+               @group.Add(inModel); 
             }
-            else
-            {
-                Map.Add(name, new List <Object> ());
-                Map[name].Add(value);
-            }
-            
         }
     }
 }
