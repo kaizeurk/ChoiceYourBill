@@ -14,29 +14,34 @@ namespace ChoiceYourBill.TemplateHelpers.RecordMode
     {
         private CollectionsGroupHelper pollCollectionsGroupHelpers;
 
+        private  IEnumerable<Poll> polls;
+
         public CollectionsGroupHelper PollCollectionsGroupHelpers
         {
             get => pollCollectionsGroupHelpers;
             private set => pollCollectionsGroupHelpers = value;
         }
+        public IEnumerable<Poll> Polls { get => polls; private set => polls = value; }
 
         public PollsRecordTemplateHelper()
         {
             PollCollectionsGroupHelpers = new CollectionsGroupHelper();
-            Records = ObtainAllRecords();
+            ObtainAllRecords();
         }
 
         public override List<Model> ObtainAllRecords()
         {
-            List<Poll> polls = Dbb.Polls.Include("Votes").ToList();
-            Records = polls.Cast<Model>().ToList();
-            provideCollectionsGroup(polls);
+            List<Poll> inPolls = Dbb.Polls.Include("Votes").ToList();
+            Polls = inPolls.ToList().ToArray();
+            Records = inPolls.Cast<Model>().ToList();
+            provideCollectionsGroup(inPolls);
             return Records;
+           
         }
 
-        private void provideCollectionsGroup(List<Poll> polls)
+        private void provideCollectionsGroup(List<Poll> inPolls)
         {
-            foreach (var poll in polls)
+            foreach (var poll in inPolls)
             {
                 foreach (var vote in poll.Votes)
                 {

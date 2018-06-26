@@ -11,7 +11,6 @@ namespace ChoiceYourBill.Models
     {
 
         public int Id { get; set; }
-        public String Name { get; set; }
         public DateTime Date { get; set; }
         public virtual List<Vote> Votes { get; set; }
     }

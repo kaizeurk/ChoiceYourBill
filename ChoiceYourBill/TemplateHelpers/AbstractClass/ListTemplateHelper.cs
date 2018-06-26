@@ -10,7 +10,7 @@ namespace ChoiceYourBill.TemplateHelpers.AbstractClass
     [DataContract]
     abstract public class ListTemplateHelper : TemplateHelper
     {
-        private List<Model> records;
+        protected List<Model> records;
 
         [DataMember]
         public List<Model> Records { get => records; protected set => records = value; }

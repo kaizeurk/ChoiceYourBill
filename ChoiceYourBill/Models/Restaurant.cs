@@ -29,7 +29,6 @@ namespace ChoiceYourBill.Models
 
         public int Id { get; set; }
         public int IdResto { get => idResto; set => idResto = value; }
-        public string Name { get => name; set => name = value; }
         public string Fone { get => fone; set => fone = value; }
         public string Address { get => address; set => address = value; }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -22,8 +23,9 @@ namespace ChoiceYourBill.Controllers
         {
             PollsRecordTemplateHelper templateHelper = new PollsRecordTemplateHelper();
 //            List<Poll> list = db.Polls.Include("Votes").ToList();
-            ViewBag("templateHelper");
-            return View(templateHelper.Records);
+            ViewBag.templateHelper = templateHelper;
+            IEnumerable<Poll> List =  templateHelper.Polls;
+            return View(List);
         }
 
         // GET: Polls/Details/5
