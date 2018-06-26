@@ -6,58 +6,67 @@ using ChoiceYourBill.Models.AbstractClass;
 
 namespace ChoiceYourBill.TemplateHelpers.AbstractClass
 {
-    public class CollectionsGroupHelper
+    public class CollectionsGroupHelper <T> where T : Model
     {
-       private Dictionary<string, GroupHelper> map;
+        const int OUT_OF_RANGE = -1;
 
         public CollectionsGroupHelper()
         {
-            this.Map  = new Dictionary<string, GroupHelper>();
+            this.GroupHelpers  = new List<GroupHelper<T>>();
         }
    
-        public CollectionsGroupHelper(Dictionary<string, GroupHelper> map)
+        public CollectionsGroupHelper(string inTitle, List<GroupHelper<T>> map)
         {
-            this.Map = map;
+            this.GroupHelpers = map;
+            Title = inTitle;
         }
 
-        public Dictionary<string, GroupHelper> Map { get; }
+        public List<GroupHelper<T>> GroupHelpers { get; set; }
+        protected string Title { get; set; }
 
-        public void Add(String name, Model value)
+        public void Add(string name, T value)
         {
-            if(Map.ContainsKey(name))
+            int indexContains = ContainsTitle(name);
+            if (indexContains == OUT_OF_RANGE)
             {
-                Map[name].Add(name,value);
+                GroupHelpers[indexContains].Add(value);
             }
             else
             {
-                Map.Add(name, new GroupHelper (name,new List<Model>()));
-                Map[name].Add(name,value);
+                GroupHelper<T> groupHelper = new GroupHelper<T>(name,new List<T> { value});
+
+                GroupHelpers.Add(groupHelper);
             }
         }
 
-        public bool delete(String name, Model value)
+        private int ContainsTitle(string inTitle)
         {
-            if(Map.ContainsKey(name))
+            int cpt = 0;
+            foreach(var elem in GroupHelpers)
             {
-                Map[name].@group.Remove(value);
-                return true;
+                if(String.Equals(elem.Title,inTitle))
+                {
+                    return cpt;
+                }
+                cpt++;
             }
+            return OUT_OF_RANGE;
+        }
+
+        public bool delete(String name, T value)
+        {
+            
 
             return false;
         }
 
-        public bool delete(String name, GroupHelper value)
+        public bool delete(String name, GroupHelper<T> value)
         {
-            if(Map.ContainsKey(name))
-            {
-                Map.Remove(name);
-                return true;
-            }
-
+            
             return false;
         }
 
-        private void AddOnGroups(GroupHelper groupHelper)
+        private void AddOnGroups(GroupHelper<T> groupHelper)
         {
             
         }

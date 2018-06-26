@@ -5,38 +5,67 @@ using ChoiceYourBill.Models.AbstractClass;
 
 namespace ChoiceYourBill.TemplateHelpers.AbstractClass
 {
-    public struct GroupHelper
+    public struct GroupHelper <T> where T : Model
     {
-        public string title;
-        public List<Model> group;
 
-        public GroupHelper(string inTitle,List<Model> inGroup)
+        const int OUT_OF_RANGE = -1;
+        private string title;
+
+        private List<GroupHelper<T>> GroupsLevel;
+
+
+        public List<T> GroupList { get; set; }
+        public string Title { get => title; set => title = value; }
+        public List<GroupHelper<T>> GroupsLevel1 { get => GroupsLevel; set => GroupsLevel = value; }
+
+        public GroupHelper(string inTitle,List<T> inGroup)
         {
-           @group = new List<Model>();
            title = inTitle;
+           GroupsLevel = new List<GroupHelper<T>>();
+           GroupList = new List<T>();
            if (inGroup.Any())
            {
-              collect(inTitle, inGroup);  
+                Collect(inTitle, inGroup);  
            }
         }
 
-        private void collect(string inTitle, List<Model> inGroup)
+        private void Collect(string inTitle, List<T> inGroup)
         {
             foreach (var iteModel in inGroup)
             {
                if(String.Equals((iteModel.Name).ToLower(), inTitle.ToLower()))
                {
-                 @group.Add(iteModel);       
+                    GroupList.Add(iteModel);       
                } 
             } 
         }
 
-        public void Add(string inTitle, Model inModel)
+        public void Add( T inModel)
         {
-            if (String.Equals(inTitle,title))
+           GroupList.Add(inModel); 
+        }
+
+        public void AddToLowerLevel(GroupHelper<T> group)
+        {
+            int indexGroupsContains = GroupLevelHelperContains(group);
+            if(OUT_OF_RANGE == indexGroupsContains )
             {
-               @group.Add(inModel); 
+                GroupsLevel[indexGroupsContains].Collect(group.Title,group.GroupList);
             }
+        }
+
+        private int GroupLevelHelperContains(GroupHelper<T> group)
+        {
+           int cpt = 0;
+           foreach (var item in GroupsLevel)
+           {
+              if(String.Equals(item.Title,group.Title))
+              {
+                    return cpt;
+              }
+                cpt++;
+           }
+            return OUT_OF_RANGE;
         }
     }
 }

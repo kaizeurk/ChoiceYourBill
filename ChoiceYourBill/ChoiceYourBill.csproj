@@ -199,6 +199,7 @@
     <Compile Include="TemplateHelpers\AbstractClass\CollectionsGroupHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\GroupHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\ListTemplateHelper.cs" />
+    <Compile Include="TemplateHelpers\AbstractClass\MultiLevelCollectionsGroupHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\TemplateHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\CreateTemplateHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\DeleteTemplateHelper.cs" />
