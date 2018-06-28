@@ -12,20 +12,22 @@ namespace ChoiceYourBill.TemplateHelpers.RecordMode
     [DataContract]
     public class PollsRecordTemplateHelper : ListTemplateHelper
     {
-        private CollectionsGroupHelper pollCollectionsGroupHelpers;
+        private List<Group> pollCollectionsGroupHelpers;
 
         private  IEnumerable<Poll> polls;
 
-        public CollectionsGroupHelper PollCollectionsGroupHelpers
+        public List<Group> PollCollectionsGroupHelpers
         {
             get => pollCollectionsGroupHelpers;
             private set => pollCollectionsGroupHelpers = value;
         }
         public IEnumerable<Poll> Polls { get => polls; private set => polls = value; }
 
+
+        // Constructor
         public PollsRecordTemplateHelper()
         {
-            PollCollectionsGroupHelpers = new CollectionsGroupHelper();
+            PollCollectionsGroupHelpers = new List<Group>();
             ObtainAllRecords();
         }
 
@@ -34,20 +36,57 @@ namespace ChoiceYourBill.TemplateHelpers.RecordMode
             List<Poll> inPolls = Dbb.Polls.Include("Votes").ToList();
             Polls = inPolls.ToList().ToArray();
             Records = inPolls.Cast<Model>().ToList();
-            provideCollectionsGroup(inPolls);
+            ProvideCollectionsGroup(inPolls);
             return Records;
            
         }
 
-        private void provideCollectionsGroup(List<Poll> inPolls)
+        private void ProvideCollectionsGroup(List<Poll> inPolls)
         {
+            List<Restaurant> restaurants = Dbb.Restaurants.ToList();
+           // List<Group> pollListGroupHelper = new List<Group>();
+            PollCollectionsGroupHelpers = new List<Group>();
             foreach (var poll in inPolls)
             {
-                foreach (var vote in poll.Votes)
+                Group pollGroupHelper = new Group();
+                pollGroupHelper.Title = poll.Name;
+                pollGroupHelper.Id = poll.Id;
+                foreach (var rest in restaurants)
                 {
-                    PollCollectionsGroupHelpers.Add(vote.Restaurant.Name, vote);
+
+                    List<Vote> listeVote = (from vote in poll.Votes
+                                            where vote.Restaurant.Name == rest.Name
+                                            select vote ).ToList();
+
+                    Group votreGroupHelper = new Group();
+                    votreGroupHelper.Id = rest.Id;
+                    votreGroupHelper.Title = rest.Name;
+                    if (listeVote.Any())
+                    {
+                        votreGroupHelper.GroupList = listeVote;
+                    }
+                    if (pollGroupHelper.NextGroups == null)
+                    {
+                        pollGroupHelper.NextGroups = new List<Group>() { votreGroupHelper };
+                    }
+                    else
+                    {
+                        ((List<Group>)(pollGroupHelper.NextGroups)).Add(votreGroupHelper);
+                    }
+
+                    
+                    //PollCollectionsGroupHelpers.Add(vote.Restaurant.Name, vote, poll.Name);
+                    //PollCollectionsGroupHelpers[0].CollectionsGroupNextLevel.
+                    
+
                 }
+                PollCollectionsGroupHelpers.Add(pollGroupHelper);
             } 
+        }
+
+        private Dictionary<string,Poll> t()
+        {
+            return null;
         }
 
     }

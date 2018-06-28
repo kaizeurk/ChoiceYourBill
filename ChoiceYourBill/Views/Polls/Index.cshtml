@@ -12,22 +12,15 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
+        <th>Poll Session Name</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in templateHelper.PollCollectionsGroupHelpers)
+{
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -36,7 +29,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="3">
+        <td colspan="2">
             <table class="table">
                 <tr>
                     <th>Id vote</th>
@@ -45,22 +38,39 @@
                     <th>Restaurant Name</th>
                 </tr>
 
-                @foreach (var item_vote in item.Votes)
+                @foreach (var item_group_vote in item.NextGroups)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item_vote.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item_vote.User.Firstname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item_vote.User.Lastname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item_vote.Restaurant.Name)
-                        </td>
-                    </tr>
+                    if (item_group_vote.GroupList != null)
+                    {
+                        foreach (ChoiceYourBill.Models.Vote item_vote in item_group_vote.GroupList)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item_vote.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item_vote.User.Firstname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item_vote.User.Lastname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item_group_vote.Title)
+                                </td>
+                            </tr>
+
+                        }
+
+                    }
+                    else
+                    {
+                        <tr><td colspan="3">No Vote for this Option</td>
+                            <td>  @Html.DisplayFor(modelItem => item_group_vote.Title) </td>
+                        </tr>
+
+                    }
+                    <tr><td colspan="4"></td></tr>
                 }
 
             </table>

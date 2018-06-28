@@ -9,32 +9,37 @@ namespace ChoiceYourBill.TemplateHelpers.AbstractClass
     public class CollectionsGroupHelper <T> where T : Model
     {
         const int OUT_OF_RANGE = -1;
+        //private CollectionsGroupHelper<Object> collectionsGroupNextLevel;
 
         public CollectionsGroupHelper()
         {
             this.GroupHelpers  = new List<GroupHelper<T>>();
         }
    
-        public CollectionsGroupHelper(string inTitle, List<GroupHelper<T>> map)
+        public CollectionsGroupHelper(string inTitle, List<GroupHelper<T>> map, CollectionsGroupHelper<T> inCollectionsGroupNextLevel=null)
         {
             this.GroupHelpers = map;
             Title = inTitle;
+            if(inCollectionsGroupNextLevel != null)
+            {
+              // CollectionsGroupNextLevel = new CollectionsGroupHelper<T>();
+            }
         }
 
         public List<GroupHelper<T>> GroupHelpers { get; set; }
         protected string Title { get; set; }
 
-        public void Add(string name, T value)
+        public void Add(string name, T value, string inCollectionName = null)
         {
-            int indexContains = ContainsTitle(name);
-            if (indexContains == OUT_OF_RANGE)
+            int indexContains = ContainsTitle(inCollectionName);
+            if (indexContains > OUT_OF_RANGE)
             {
                 GroupHelpers[indexContains].Add(value);
             }
             else
             {
                 GroupHelper<T> groupHelper = new GroupHelper<T>(name,new List<T> { value});
-
+                Title = inCollectionName;
                 GroupHelpers.Add(groupHelper);
             }
         }

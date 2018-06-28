@@ -5,24 +5,23 @@ using ChoiceYourBill.Models.AbstractClass;
 
 namespace ChoiceYourBill.TemplateHelpers.AbstractClass
 {
-    public struct GroupHelper <T> where T : Model
+    public class GroupHelper <T> where T : Model
     {
 
         const int OUT_OF_RANGE = -1;
         private string title;
 
-        private List<GroupHelper<T>> GroupsLevel;
+        private List<GroupHelper<T>> groupsLevel;
 
 
         public List<T> GroupList { get; set; }
         public string Title { get => title; set => title = value; }
-        public List<GroupHelper<T>> GroupsLevel1 { get => GroupsLevel; set => GroupsLevel = value; }
+        public List<GroupHelper<T>> GroupsLevel { get => groupsLevel; set => groupsLevel = value; }
 
         public GroupHelper(string inTitle,List<T> inGroup)
         {
-           title = inTitle;
-           GroupsLevel = new List<GroupHelper<T>>();
-           GroupList = new List<T>();
+           title       = inTitle;
+           GroupList   = new List<T>();
            if (inGroup.Any())
            {
                 Collect(inTitle, inGroup);  
@@ -33,7 +32,7 @@ namespace ChoiceYourBill.TemplateHelpers.AbstractClass
         {
             foreach (var iteModel in inGroup)
             {
-               if(String.Equals((iteModel.Name).ToLower(), inTitle.ToLower()))
+               if(String.Equals((Title).ToLower(), inTitle.ToLower()))
                {
                     GroupList.Add(iteModel);       
                } 
@@ -48,10 +47,16 @@ namespace ChoiceYourBill.TemplateHelpers.AbstractClass
         public void AddToLowerLevel(GroupHelper<T> group)
         {
             int indexGroupsContains = GroupLevelHelperContains(group);
-            if(OUT_OF_RANGE == indexGroupsContains )
+            if (GroupsLevel.Any()==false && OUT_OF_RANGE == indexGroupsContains)
             {
-                GroupsLevel[indexGroupsContains].Collect(group.Title,group.GroupList);
+                GroupsLevel = new List<GroupHelper<T>>();
+                indexGroupsContains = 0;
             }
+            if (OUT_OF_RANGE != indexGroupsContains )
+            {
+               GroupsLevel[indexGroupsContains].Collect(group.Title,group.GroupList);
+            }
+            
         }
 
         private int GroupLevelHelperContains(GroupHelper<T> group)

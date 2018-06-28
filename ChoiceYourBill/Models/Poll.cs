@@ -9,6 +9,10 @@ namespace ChoiceYourBill.Models
 {
     public class Poll : Model
     {
+        public Poll()
+        {
+            Votes = new List<Vote>();
+        }
 
         public int Id { get; set; }
         public DateTime Date { get; set; }

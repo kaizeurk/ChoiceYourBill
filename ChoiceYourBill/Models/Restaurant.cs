@@ -9,14 +9,11 @@ namespace ChoiceYourBill.Models
 {
     public class Restaurant : Model
     {
-        
-        private int idResto;
-        private string name;
-        private string fone;
         private string address;
 
-        public Restaurant()
+        public Restaurant():base()
         {
+            Address = "";
         }
 
         public Restaurant(Restaurant inRestaurant)
@@ -28,8 +25,8 @@ namespace ChoiceYourBill.Models
         }
 
         public int Id { get; set; }
-        public int IdResto { get => idResto; set => idResto = value; }
-        public string Fone { get => fone; set => fone = value; }
+        public int IdResto { get; set; }
+        public string Fone { get; set; }
         public string Address { get => address; set => address = value; }
 
         public override bool Equals(object obj)
@@ -41,9 +38,9 @@ namespace ChoiceYourBill.Models
         public override int GetHashCode()
         {
             var hashCode = -94008202;
-            hashCode = hashCode * -1521134295 + idResto.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(fone);
+            hashCode = hashCode * -1521134295 + IdResto.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Fone);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(address);
             hashCode = hashCode * -1521134295 + Id.GetHashCode();
             hashCode = hashCode * -1521134295 + IdResto.GetHashCode();

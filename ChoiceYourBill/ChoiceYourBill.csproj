@@ -185,6 +185,18 @@
     <Compile Include="Migrations\201806222004220_udateFields.Designer.cs">
       <DependentUpon>201806222004220_udateFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806281242260_reevaluateFields.cs" />
+    <Compile Include="Migrations\201806281242260_reevaluateFields.Designer.cs">
+      <DependentUpon>201806281242260_reevaluateFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806281934070_relevateError.cs" />
+    <Compile Include="Migrations\201806281934070_relevateError.Designer.cs">
+      <DependentUpon>201806281934070_relevateError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806281939437_removeRestaurantOnPoll.cs" />
+    <Compile Include="Migrations\201806281939437_removeRestaurantOnPoll.Designer.cs">
+      <DependentUpon>201806281939437_removeRestaurantOnPoll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AbstractClass\Model.cs" />
     <Compile Include="Models\DataAccessLayer\Dal.cs" />
@@ -197,6 +209,7 @@
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\CollectionsGroupHelper.cs" />
+    <Compile Include="TemplateHelpers\AbstractClass\Group.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\GroupHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\ListTemplateHelper.cs" />
     <Compile Include="TemplateHelpers\AbstractClass\MultiLevelCollectionsGroupHelper.cs" />
@@ -207,6 +220,7 @@
     <Compile Include="TemplateHelpers\AbstractClass\RecordTemplateHelper.cs" />
     <Compile Include="TemplateHelpers\CreateMode\RestaurantCreateTemplateHelper.cs" />
     <Compile Include="TemplateHelpers\CreateMode\UserCreateTemplateHelper.cs" />
+    <Compile Include="TemplateHelpers\EditMode\PollsEditTemplateHelper.cs" />
     <Compile Include="TemplateHelpers\RecordMode\PollsRecordTemplateHelper.cs" />
     <Compile Include="TemplateHelpers\RecordMode\HomeRecordTemplateHelper.cs" />
     <Compile Include="TrxObject\AbstractClass\CreateTrxObject.cs" />
@@ -277,7 +291,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="TemplateHelpers\DeleteMode\" />
-    <Folder Include="TemplateHelpers\EditMode\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -307,6 +320,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806222004220_udateFields.resx">
       <DependentUpon>201806222004220_udateFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806281242260_reevaluateFields.resx">
+      <DependentUpon>201806281242260_reevaluateFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806281934070_relevateError.resx">
+      <DependentUpon>201806281934070_relevateError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806281939437_removeRestaurantOnPoll.resx">
+      <DependentUpon>201806281939437_removeRestaurantOnPoll.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

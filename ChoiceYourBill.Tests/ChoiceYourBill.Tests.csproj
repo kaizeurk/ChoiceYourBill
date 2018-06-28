@@ -99,6 +99,7 @@
     <Compile Include="Models\DataAccessLayer\DbbInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="TemplateHelpers\GroupHelpersTest.cs" />
     <Compile Include="TemplateHelpers\HomeRecordTemplateHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>

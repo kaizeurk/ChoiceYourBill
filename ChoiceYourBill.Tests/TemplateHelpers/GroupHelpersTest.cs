@@ -1,9 +1,5 @@
 ﻿using ChoiceYourBill.Models;
-using ChoiceYourBill.Models.DataAccessLayer;
-using ChoiceYourBill.Models.DataAccessLayer.Interface;
 using ChoiceYourBill.TemplateHelpers.AbstractClass;
-using ChoiceYourBill.TemplateHelpers.RecordMode;
-using ChoiceYourBill.Tests.Models.DataAccessLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -14,18 +10,11 @@ using System.Threading.Tasks;
 namespace ChoiceYourBill.Tests.TemplateHelpers
 {
     [TestClass]
-    public class HomeRecordTemplateHelperTest
+    class GroupHelpersTest
     {
-        private IDal dal;
-        [TestInitialize]
-        public void InitTest()
-        {
-            DbbInit.initDbb();
-            dal = new Dal();
-        }
 
         [TestMethod]
-        public void GroupHelpersTests()
+        public void GroupHelpersTests() 
         {
             List<GroupHelper<Vote>> polls = new List<GroupHelper<Vote>>();
             // restaurants creat test
@@ -87,12 +76,12 @@ namespace ChoiceYourBill.Tests.TemplateHelpers
             };
 
             //users create test
-            User user1 = new User(1, "userLastname1", "userFirstName1");
-            User user2 = new User(2, "userLastname2", "userFirstName2");
-            User user3 = new User(3, "userLastname3", "userFirstName3");
-            User user4 = new User(4, "userLastname4", "userFirstName4");
-            User user5 = new User(5, "userLastname5", "userFirstName5");
-            User user6 = new User(6, "userLastname6", "userFirstName6");
+            User user1 = new User(1, "userLastname1","userFirstName1");
+            User user2 = new User(2, "userLastname2","userFirstName2");
+            User user3 = new User(3, "userLastname3","userFirstName3");
+            User user4 = new User(4, "userLastname4","userFirstName4");
+            User user5 = new User(5, "userLastname5","userFirstName5");
+            User user6 = new User(6, "userLastname6","userFirstName6");
 
 
             Poll poll1 = new Poll
@@ -113,50 +102,50 @@ namespace ChoiceYourBill.Tests.TemplateHelpers
 
             Vote vote1 = new Vote
             {
-                Id = 1,
-                Name = "vote1",
-                Restaurant = restaurant1,
-                User = user1
+                 Id = 1,
+                 Name = "vote1",
+                 Restaurant = restaurant1,
+                 User = user1
             };
 
             Vote vote2 = new Vote
             {
-                Id = 2,
-                Name = "vote2",
-                Restaurant = restaurant1,
-                User = user2
+                 Id = 2,
+                 Name = "vote2",
+                 Restaurant = restaurant1,
+                 User = user2
             };
 
             Vote vote3 = new Vote
             {
-                Id = 3,
-                Name = "vote3",
-                Restaurant = restaurant1,
-                User = user3
+                 Id = 3,
+                 Name = "vote3",
+                 Restaurant = restaurant1,
+                 User = user3
             };
 
             Vote vote4 = new Vote
             {
-                Id = 4,
-                Name = "vote4",
-                Restaurant = restaurant2,
-                User = user4
+                 Id = 4,
+                 Name = "vote4",
+                 Restaurant = restaurant2,
+                 User = user4
             };
 
             Vote vote5 = new Vote
             {
-                Id = 5,
-                Name = "vote5",
-                Restaurant = restaurant3,
-                User = user5
+                 Id = 5,
+                 Name = "vote5",
+                 Restaurant = restaurant3,
+                 User = user5
             };
 
             Vote vote6 = new Vote
             {
-                Id = 6,
-                Name = "vote6",
-                Restaurant = restaurant3,
-                User = user6
+                 Id = 6,
+                 Name = "vote6",
+                 Restaurant = restaurant3,
+                 User = user6
             };
 
             poll1.Votes.Add(vote1);
@@ -171,32 +160,12 @@ namespace ChoiceYourBill.Tests.TemplateHelpers
             poll2.Votes.Add(vote6);
 
 
-            polls.Add(new GroupHelper<Vote>(poll1.Name, poll1.Votes));
-            polls.Add(new GroupHelper<Vote>(poll2.Name, poll2.Votes));
-
+            polls.Add(new GroupHelper<Vote>(poll1.Name,poll1.Votes));
+            polls.Add(new GroupHelper<Vote>(poll2.Name,poll2.Votes));
+           
             Assert.IsNotNull(polls);
             Assert.IsNotNull(polls[0].GroupList);
-            Assert.AreEqual(6, polls[0].GroupList.Count());
+            Assert.Equals(6, polls[0].GroupList.Count());
         }
-    
-
-    [TestMethod]
-        public void Index()
-        {
-            dal.CreateRestaurant("La bonne fourchette", "01 02 03 04 05", "Metro Longueuil");
-            dal.CreateRestaurant("La bonne fourchette1", "01 02 03 04 05", "Metro Longueuil");
-            dal.CreateRestaurant("La bonne fourchette2", "01 02 03 04 05", "Metro Longueuil");
-            dal.CreateRestaurant("La bonne fourchette3", "01 02 03 04 05", "Metro Longueuil");
-            dal.CreateRestaurant("La bonne fourchette4", "01 02 03 04 05", "Metro Longueuil");
-            // Arrange
-
-            ListTemplateHelper templateHelper = new HomeRecordTemplateHelper();
-            // Assert
-            Assert.IsNotNull(templateHelper);
-            Assert.IsNotNull(templateHelper.Records);
-            Assert.Equals(5,templateHelper.Records.Count());
-        }
-
-
     }
 }
