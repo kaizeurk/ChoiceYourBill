@@ -197,6 +197,22 @@
     <Compile Include="Migrations\201806281939437_removeRestaurantOnPoll.Designer.cs">
       <DependentUpon>201806281939437_removeRestaurantOnPoll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806291354130_add_active_flag_in_poll.cs" />
+    <Compile Include="Migrations\201806291354130_add_active_flag_in_poll.Designer.cs">
+      <DependentUpon>201806291354130_add_active_flag_in_poll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806291537131_add_foreign_key_on_vote.cs" />
+    <Compile Include="Migrations\201806291537131_add_foreign_key_on_vote.Designer.cs">
+      <DependentUpon>201806291537131_add_foreign_key_on_vote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806291544472_add_foreign_key_on_new_vote.cs" />
+    <Compile Include="Migrations\201806291544472_add_foreign_key_on_new_vote.Designer.cs">
+      <DependentUpon>201806291544472_add_foreign_key_on_new_vote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806291620056_convert_active_flag_int_to_bool.cs" />
+    <Compile Include="Migrations\201806291620056_convert_active_flag_int_to_bool.Designer.cs">
+      <DependentUpon>201806291620056_convert_active_flag_int_to_bool.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AbstractClass\Model.cs" />
     <Compile Include="Models\DataAccessLayer\Dal.cs" />
@@ -329,6 +345,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806281939437_removeRestaurantOnPoll.resx">
       <DependentUpon>201806281939437_removeRestaurantOnPoll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806291354130_add_active_flag_in_poll.resx">
+      <DependentUpon>201806291354130_add_active_flag_in_poll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806291537131_add_foreign_key_on_vote.resx">
+      <DependentUpon>201806291537131_add_foreign_key_on_vote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806291544472_add_foreign_key_on_new_vote.resx">
+      <DependentUpon>201806291544472_add_foreign_key_on_new_vote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806291620056_convert_active_flag_int_to_bool.resx">
+      <DependentUpon>201806291620056_convert_active_flag_int_to_bool.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

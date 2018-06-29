@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using ChoiceYourBill.Controllers.AbstractClass;
 using ChoiceYourBill.Models;
 using ChoiceYourBill.Models.AbstractClass;
+using ChoiceYourBill.TemplateHelpers.EditMode;
 using ChoiceYourBill.TemplateHelpers.RecordMode;
 
 namespace ChoiceYourBill.Controllers
@@ -58,9 +59,14 @@ namespace ChoiceYourBill.Controllers
         {
             if (ModelState.IsValid)
             {
-               db.Polls.Add(poll);
-               db.SaveChanges();
-               return RedirectToAction("Index");
+                PollsEditTemplateHelper pollsEditTemplateHelper = new PollsEditTemplateHelper(poll);
+               //db.Polls.Add(poll);
+               //db.SaveChanges();
+               if(pollsEditTemplateHelper.UpdateRecord())
+               {
+                    return RedirectToAction("Index");
+
+               }
             }
             
             return View(poll);
@@ -74,6 +80,9 @@ namespace ChoiceYourBill.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Poll poll = db.Polls.Find(id);
+            List<Restaurant> restaurants = db.Restaurants.ToList();
+            ViewBag.ListeRestaurantss = new SelectList(restaurants, "Id", "Nom");
+            poll.Votes.Add(new Vote());
             if (poll == null)
             {
                 return HttpNotFound();

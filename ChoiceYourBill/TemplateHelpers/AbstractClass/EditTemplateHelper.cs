@@ -13,5 +13,10 @@ namespace ChoiceYourBill.TemplateHelpers.AbstractClass
 
         }
 
+        abstract public bool Validate();
+
+        abstract public bool UpdateRecord();
+
+
     }
 }
